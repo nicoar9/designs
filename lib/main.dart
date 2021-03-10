@@ -1,3 +1,4 @@
+import 'package:designs/src/pages/animation_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:designs/src/pages/headers_page.dart';
@@ -9,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Design App',
-      home: HeadersPage(),
+      home: AnimationPage(),
     );
   }
 }
