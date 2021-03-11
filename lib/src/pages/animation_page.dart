@@ -26,6 +26,10 @@ class _AnimatedSquareState extends State<AnimatedSquare>
   AnimationController controller;
   Animation<double> rotation;
   Animation<double> opacity;
+  Animation<double> opacityOut;
+
+  Animation<double> moveRight;
+  Animation<double> scale;
 
   @override
   void initState() {
@@ -35,19 +39,31 @@ class _AnimatedSquareState extends State<AnimatedSquare>
     rotation = Tween(
       begin: 0.0,
       end: 2 * Math.pi,
-    ).animate(CurvedAnimation(parent: controller, curve: Curves.bounceIn));
+    ).animate(CurvedAnimation(parent: controller, curve: Curves.bounceOut));
 
     opacity = Tween(begin: 0.1, end: 1.0).animate(
       CurvedAnimation(
         parent: controller,
-        curve: Interval(0.5, 1),
+        curve: Interval(0, 0.5),
       ),
     );
+    opacityOut = Tween(begin: 1.0, end: 0.0).animate(
+      CurvedAnimation(
+        parent: controller,
+        curve: Interval(0.75, 1),
+      ),
+    );
+
+    moveRight = Tween(begin: 0.0, end: 200.0).animate(
+      controller,
+    );
+
+    scale = Tween(begin: 0.0, end: 2.0).animate(controller);
 
     controller.addListener(() {
       print('Status: ${controller.status}');
       if (controller.status == AnimationStatus.completed) {
-        controller.reset();
+        controller.repeat();
       }
     });
     super.initState();
@@ -67,11 +83,16 @@ class _AnimatedSquareState extends State<AnimatedSquare>
       animation: controller,
       child: _Square(),
       builder: (BuildContext context, Widget child) {
-        return Transform.rotate(
-          angle: rotation.value,
-          child: Opacity(
-            opacity: opacity.value,
-            child: child,
+        return Transform.translate(
+          offset: Offset(moveRight.value, 0),
+          child: Transform.rotate(
+            angle: rotation.value,
+            child: Opacity(
+              opacity: opacity.value,
+              child: Opacity(
+                  opacity: opacityOut.value,
+                  child: Transform.scale(scale: scale.value, child: child)),
+            ),
           ),
         );
       },

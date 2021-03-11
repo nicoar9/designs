@@ -1,4 +1,7 @@
+import 'package:designs/src/pages/animated_box_page.dart';
 import 'package:designs/src/pages/animation_page.dart';
+import 'package:designs/src/labs/circular_progress_page.dart';
+import 'package:designs/src/pages/graphics_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:designs/src/pages/headers_page.dart';
@@ -10,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Design App',
-      home: AnimationPage(),
+      home: GraphicsPage(),
     );
   }
 }
