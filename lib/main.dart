@@ -1,10 +1,7 @@
-import 'package:designs/src/pages/animated_box_page.dart';
-import 'package:designs/src/pages/animation_page.dart';
-import 'package:designs/src/labs/circular_progress_page.dart';
-import 'package:designs/src/pages/graphics_page.dart';
+import 'package:designs/src/labs/slideshow_page.dart';
+import 'package:designs/src/pages/pinterest_page.dart';
+import 'package:designs/src/pages/slideshow_page.dart';
 import 'package:flutter/material.dart';
-
-import 'package:designs/src/pages/headers_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Design App',
-      home: GraphicsPage(),
+      home: PinterestPage(),
     );
   }
 }
