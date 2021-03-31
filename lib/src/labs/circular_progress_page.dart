@@ -1,7 +1,9 @@
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:designs/src/theme/themechanger.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CircularProgressPage extends StatefulWidget {
   @override
@@ -38,6 +40,7 @@ class _CircularProgressPageState extends State<CircularProgressPage>
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
           child: Icon(Icons.refresh),
@@ -59,7 +62,10 @@ class _CircularProgressPageState extends State<CircularProgressPage>
           width: 300,
           height: 300,
           child: CustomPaint(
-            painter: _MiRadiasProgress(percentage),
+            painter: _MiRadialProgress(
+              percentage,
+              secondaryColor: appTheme.textTheme.bodyText1.color,
+            ),
           ),
         ),
       ),
@@ -67,15 +73,18 @@ class _CircularProgressPageState extends State<CircularProgressPage>
   }
 }
 
-class _MiRadiasProgress extends CustomPainter {
+class _MiRadialProgress extends CustomPainter {
   final percentage;
-  _MiRadiasProgress(this.percentage);
+  final Color primaryColor;
+  final Color secondaryColor;
+
+  _MiRadialProgress(this.percentage, {this.primaryColor, this.secondaryColor});
 
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
       ..strokeWidth = 4
-      ..color = Colors.grey
+      ..color = this.secondaryColor
       ..style = PaintingStyle.stroke;
 
     final Offset center = Offset(size.width * 0.5, size.height / 2);

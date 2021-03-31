@@ -180,24 +180,31 @@ class _CurveHeaderPainter extends CustomPainter {
 }
 
 class CurveHeaderTwo extends StatelessWidget {
+  final Color color;
+
+  const CurveHeaderTwo({@required this.color});
   @override
   Widget build(BuildContext context) {
     return Container(
       height: double.infinity,
       width: double.infinity,
       child: CustomPaint(
-        painter: _CurveHeaderTwoPainter(),
+        painter: _CurveHeaderTwoPainter(this.color),
       ),
     );
   }
 }
 
 class _CurveHeaderTwoPainter extends CustomPainter {
+  final Color color;
+
+  _CurveHeaderTwoPainter(this.color);
+
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint();
 
-    paint.color = Color(0xff615AAB);
+    paint.color = this.color;
     paint.style = PaintingStyle.fill;
     paint.strokeWidth = 5;
 
